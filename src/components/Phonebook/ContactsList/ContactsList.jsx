@@ -6,28 +6,24 @@ import {
   DeleteButton,
 } from './ContactsList.styled';
 
-class ContactsList extends React.Component {
-  handleDelete = id => {
-    this.props.onDeleteContact(id);
+const ContactsList = ({ contacts, onDeleteContact }) => {
+  const handleDelete = id => {
+    onDeleteContact(id);
   };
 
-  render() {
-    const { contacts } = this.props;
-
-    return (
-      <ContactsContainer>
-        {contacts.map(contact => (
-          <ContactItem key={contact.id}>
-            {contact.name}: {contact.number}
-            <DeleteButton onClick={() => this.handleDelete(contact.id)}>
-              Delete
-            </DeleteButton>
-          </ContactItem>
-        ))}
-      </ContactsContainer>
-    );
-  }
-}
+  return (
+    <ContactsContainer>
+      {contacts.map(contact => (
+        <ContactItem key={contact.id}>
+          {contact.name}: {contact.number}
+          <DeleteButton onClick={() => handleDelete(contact.id)}>
+            Delete
+          </DeleteButton>
+        </ContactItem>
+      ))}
+    </ContactsContainer>
+  );
+};
 
 ContactsList.propTypes = {
   contacts: PropTypes.arrayOf(
